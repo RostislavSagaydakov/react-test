@@ -18,6 +18,7 @@ function HeroSlider() {
     return(
         <section>
             <Swiper
+                // lazy={true}
                 modules={[Navigation, Pagination, A11y]}
                 spaceBetween={0}
                 slidesPerView={1}
@@ -27,7 +28,11 @@ function HeroSlider() {
                 {images && images.map((image, index) => {
                     return (
                         <SwiperSlide key={index}>
-                            <img src={image.url} alt=""/>
+                            <img
+                                src={image.url}
+                                loading="lazy"
+                                alt=""
+                            />
                             <div className="text">
                                 {image.description}
                             </div>

@@ -15,7 +15,7 @@ export default function Category() {
         const productListUrl = 'https://dummyjson.com/products'
         fetchData(productListUrl)
     }, []);
-    const categoryNames = categoryName ? productList.filter(category => category.category === categoryName) : productList;
+    const categoryNames = productList.filter(category => category.category === categoryName);
     const products = categoryNames.map((product, index) => {
         return (
             <li key={index} className="product">
@@ -29,14 +29,12 @@ export default function Category() {
                     </a>
                 </div>
                 <div className="product-info">
-                    <div className="product-rating">
-                        <div className="rating" style={{width: Math.round(product.rating * 10) + "%"}}></div>
-                    </div>
+                    <div className="product-rating">{product.rating}</div>
                     <div className="product-name">
                         <a href={"/shop/" + product.category + "/" + product.title.replace(/\s+/g, '-').toLowerCase()}>{product.title}</a>
                     </div>
                     <div className="product-price">
-                        {product.discountPercentage && <span className='product-discount'>-{product.discountPercentage}%</span>}
+                        {product.discountPercentage && <span className='product-discount'>-${product.discountPercentage}</span>}
                         <span className="product-price">${product.price}</span>
                     </div>
                 </div>
@@ -44,10 +42,10 @@ export default function Category() {
         );
     })
     return(
-        <section className="section-category flex gap-4">
+        <section className="section-category">
             <CategorySidebar/>
-            <div className="section-category_block w-9/12">
-                <ul className="grid grid-cols-3 gap-4">
+            <div className="section-category_block">
+                <ul>
                     {products}
                 </ul>
             </div>

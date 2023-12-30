@@ -1,8 +1,18 @@
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+
 function TopSearch() {
     return (
-        <div className="serach-bar">
-            <input type="text"/>
-            <button className="search-button">search</button>
+        <div className="search-bar">
+            <input type="text"
+                   placeholder="Search..."
+                   className="rounded-md border p-2 border-slate-800"
+                   autoFocus={true}
+            />
+            <button className="search-button p-3">
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
         </div>
     )
 }

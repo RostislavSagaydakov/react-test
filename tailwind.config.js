@@ -4,8 +4,25 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx,scss}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'lg': '1120px',
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          paddingLeft: '1rem',
+          paddingRight: '1rem',
+
+          '@screen xl': {
+            maxWidth: '1152px',
+          },
+        }
+      })
+    }
+  ],
 }
 

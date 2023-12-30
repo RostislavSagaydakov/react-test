@@ -2,11 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --dropdown-background: #fff;
+  --header-background: var(--dropdown-background);
+  --menu-link-hover: #2563eb;
+}
+
 .header {
   display: flex;
   flex-direction: row;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background: var(--header-background);
 
   .logo {
-    width: 250px;
+    width: 10rem;
+    height: auto;
   }
+
+  .menu {
+    &-top_level {
+      > li {
+        >a {
+          padding: 9px 20px;
+        }
+      }
+    }
+    li {
+      position: relative;
+
+      &:hover {
+        > a {
+          color: var(--menu-link-hover);
+        }
+        .menu_dropdown {
+          display: grid;
+        }
+      }
+    }
+    a {
+      display: block;
+    }
+    .menu_dropdown {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: clamp(250px, 500px, 50vw);
+      padding: 20px;
+      background: var(--dropdown-background);
+      border-radius: 15px;
+      text-transform: capitalize;
+      li {
+
+      }
+    }
+  }
+
+  #search {
+    position: relative;
+    .search-bar {
+      position: absolute;
+      right: 100%;
+      top: -50%;
+      width: clamp(250px, 400px, 50vw);
+      display: flex;
+      + .search-link {
+        &:after {
+
+        }
+      }
+
+      input {
+        flex:1;
+      }
+    }
+  }
+}
+
+.modal {
+  position: relative;
+  z-index: 3;
+}
+
+.load {
+  position: fixed;
+  background: #000;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
