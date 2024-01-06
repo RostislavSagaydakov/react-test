@@ -4,6 +4,7 @@ import TopSearch from "./components/search";
 import AccountModalContent from "./components/account-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faUser, faCartShopping, faTimes } from '@fortawesome/free-solid-svg-icons'
+import Minicart from "./components/minicart";
 function HeaderActions() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [topSearch, setTopSearch] = React.useState(false)
@@ -60,6 +61,7 @@ function HeaderActions() {
                 <span className="minicart cursor-pointer p-3 hover:text-blue-600">
                     <FontAwesomeIcon icon={faCartShopping} />
                 </span>
+                <Minicart/>
             </li>
         </ul>
     )
