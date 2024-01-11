@@ -1,42 +1,38 @@
 import {useEffect, useState} from "react";
-import { useParams } from 'react-router-dom';
+import {NavLink, useParams} from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import CategorySidebar from "../components/category-sidebar";
 import AddToCart from "../components/add-to-cart";
-import {connect} from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import useProducts from "../../hook/useProducts";
 
 export default function Category() {
-    const [productList, setProductList] = useState([]);
+    const {data: productList, isLoading, error} = useProducts();
     let {categoryName} = useParams();
-    useEffect(() => {
-        const fetchData = async (productListUrl) => {
-            const response = await fetch(productListUrl)
-            const data = await response.json()
-            setProductList(data.products)
-        }
-        const productListUrl = 'https://dummyjson.com/products'
-        fetchData(productListUrl)
-    }, []);
     const categoryNames = categoryName ? productList.filter(category => category.category === categoryName) : productList;
     const products = categoryNames.map((product) => {
         return (
             <li key={product.title.replace(/\s+/g, '-').toLowerCase()} className="product" id={`product-${product.id}`}>
                 <div className="product-image">
-                    <a  href={"/shop/" + product.category + "/" + product.title.replace(/\s+/g, '-').toLowerCase()}>
+                    <NavLink to={"/shop/" + product.category + "/" + product.id}>
                         <LazyLoadImage
                             alt={product.brand}
                             src={product.thumbnail}
                         />
                         <span className="product-brand">{product.brand}</span>
-                    </a>
+                    </NavLink>
                 </div>
                 <div className="product-info">
                     <div className="product-info_holder">
                         <div className="product-rating">
-                            <div className="rating" style={{width: Math.round(product.rating * 10) + "%"}}></div>
+                            {product.rating}
+                            <FontAwesomeIcon icon={faStar} />
                         </div>
                         <div className="product-name">
-                            <a href={"/shop/" + product.category + "/" + product.title.replace(/\s+/g, '-').toLowerCase()}>{product.title}</a>
+                            <NavLink to={"/shop/" + product.category + "/" + product.title.replace(/\s+/g, '-').toLowerCase()}>
+                                {product.title}
+                            </NavLink>
                         </div>
                         <div className="product-price">
                             {product.discountPercentage && <span className='product-discount'>-{product.discountPercentage}%</span>}
@@ -52,8 +48,9 @@ export default function Category() {
         <section className="section-category flex gap-4">
             <CategorySidebar/>
             <div className="section-category_block w-9/12">
+                {error ?? error}
                 <ul className="grid grid-cols-3 gap-4">
-                    {products}
+                    {isLoading ? '...loading...' : products}
                 </ul>
             </div>
         </section>

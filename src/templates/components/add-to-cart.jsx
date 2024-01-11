@@ -18,7 +18,7 @@ function AddToCart(props) {
     return (
         <>
             <div className="add-to-card flex gap-4">
-                <input type="number" className="w-20"/>
+                {!itemIsAdded && <input type="number" className="w-20" min="1"/>}
                 <button
                     onClick={handleAddItem}
                     className={'hover:opacity-75 text-white font-bold py-2 px-4 rounded block w-full ' + (itemIsAdded ? 'bg-slate-500' : 'bg-blue-500')}>
