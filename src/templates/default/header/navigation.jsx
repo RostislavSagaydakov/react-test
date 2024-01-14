@@ -1,23 +1,14 @@
 import {NavLink} from 'react-router-dom'
-import {useEffect, useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import useCategories from "../../../hook/useCategories";
+
 function Navigation() {
-    const [productList, setProductList] = useState([]);
-    useEffect(() => {
-        const fetchData = async (productListUrl) => {
-            const response = await fetch(productListUrl)
-            const data = await response.json()
-            setProductList(data.products)
-        }
-        const productListUrl = 'https://dummyjson.com/products'
-        fetchData(productListUrl)
-    }, []);
-    const loadedCategories = productList.map((categoryName, key) => categoryName.category);
-    const filteredCategories = [...new Set(loadedCategories)];
-    const categories = filteredCategories.map((name, index) => {
+    const {categories} = useCategories();
+    // console.log(categories.data)
+    const categoriesList = categories.data.map((name, index) => {
         return (
-            <li key={index}><NavLink to={"/shop/" + name}>{name}</NavLink></li>
+            <li key={index}><NavLink to={"/shop/" + name}>{name.replace(/-/g, ' ')}</NavLink></li>
         );
     })
 
@@ -33,7 +24,7 @@ function Navigation() {
                         <FontAwesomeIcon icon={faChevronDown} />
                     </NavLink>
                     <ul className="menu_dropdown grid grid-cols-2 gap-4 drop-shadow-md ">
-                        {categories}
+                        {categoriesList}
                     </ul>
                 </li>
                 <li><NavLink to="/contact">Contact us</NavLink></li>

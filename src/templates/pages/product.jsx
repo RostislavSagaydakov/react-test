@@ -5,11 +5,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import AddToCart from "../components/add-to-cart";
 
 function PageProduct() {
     let {productId} = useParams();
     const {data: product, isLoading} = useProduct(productId)
-    console.log(product)
     const productInit = (
         <div className="product-container flex gap-4">
             <div className="product-image w-5/12">
@@ -33,6 +33,7 @@ function PageProduct() {
             <div className="product-info w-7/12">
                 <h1>{product.title}</h1>
                 <p>{product.description}</p>
+                {/*<AddToCart id={product.id}/>*/}
             </div>
         </div>
     )

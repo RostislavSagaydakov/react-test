@@ -1,19 +1,27 @@
-import React from "react";
+import React, { Children } from "react";
 import Modal from 'react-modal';
 import TopSearch from "./components/search";
 import AccountModalContent from "./components/account-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faUser, faCartShopping, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Minicart from "./components/minicart";
+import {useSelector} from "react-redux";
 function HeaderActions() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [minicartIsOpened, setMinicartIsOpened] = React.useState(false);
     const [topSearch, setTopSearch] = React.useState(false)
+    const itemsInMinicart = useSelector(state => state.cart.itemsInCart);
+    const itemsMinicartFiltered = [...new Set(itemsInMinicart)];
 
     function openModal() {
         setIsOpen(true);
     }
     function closeModal() {
         setIsOpen(false);
+    }
+
+    function openMinicart() {
+        setMinicartIsOpened(minicartIsOpened => !minicartIsOpened);
     }
 
     function openSearch() {
@@ -49,8 +57,9 @@ function HeaderActions() {
                     onRequestClose={closeModal}
                     contentLabel="Example Modal"
                 >
-                    <button onClick={closeModal}
-                            className="p-3 block cursor-pointer absolute right-3 top-1 hover:text-blue-600 hover:scale-125 ease-out duration-300"
+                    <button
+                        onClick={closeModal}
+                        className="p-3 block cursor-pointer absolute right-3 top-1 hover:text-blue-600 hover:scale-125 ease-out duration-300"
                     >
                         <FontAwesomeIcon icon={faTimes} />
                     </button>
@@ -58,10 +67,13 @@ function HeaderActions() {
                 </Modal>
             </li>
             <li>
-                <span className="minicart cursor-pointer p-3 hover:text-blue-600">
+                <span
+                    onClick={openMinicart}
+                    className="minicart cursor-pointer p-3 hover:text-blue-600">
                     <FontAwesomeIcon icon={faCartShopping} />
+                    {itemsMinicartFiltered.length}
                 </span>
-                <Minicart/>
+                {minicartIsOpened && <Minicart openMinicart={openMinicart}/>}
             </li>
         </ul>
     )

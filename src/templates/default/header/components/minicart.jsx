@@ -1,20 +1,28 @@
 import {useSelector, useDispatch} from "react-redux";
 import {deleteItemFromCart} from "../../../../redux/cart/reducer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import {faTimes, faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {NavLink} from "react-router-dom";
 
-function Minicart() {
+function Minicart(props) {
     const dispatch = useDispatch();
     const itemsList = useSelector(state => state.cart.itemsInCart);
     const items = [...new Set(itemsList)];
     const totalPrice = items.reduce((acc, element) => acc += element.price , 0)
     return (
-        <>
-            <div>
+        <div className="minicart fixed top-0 bottom-0 right-0 h-dvh overflow-auto w-64 bg-gray-200 border-s-4 border-indigo-500 p-4">
+            <span
+                onClick={props.openMinicart}
+                className="p-1 block cursor-pointer hover:text-blue-600 ease-out duration-300">
+                <FontAwesomeIcon icon={faTimes}/>
+            </span>
+            {totalPrice == 0 && (
+                <p>No items</p>
+            )}
+            {(totalPrice > 0) && <div>
                 <ul>
                     {items.map((addedItem, index) => (
-                        <li key={index}  className="grid grid-cols-4 grid-rows-2 gap-1">
+                        <li key={index} className="grid grid-cols-4 grid-rows-2 gap-1">
                             <div className="row-span-2">
                                 <img
                                     src={addedItem.thumbnail}
@@ -37,10 +45,10 @@ function Minicart() {
                 <div className="total">
                     ${totalPrice}
                 </div>
-                <NavLink to="/checkout/cart">cart</NavLink>
-                <NavLink to="/checkout">checkout</NavLink>
-            </div>
-        </>
+                <NavLink to="/checkout/cart" onClick={props.openMinicart}>cart</NavLink>
+                {/*<NavLink to="/checkout">checkout</NavLink>*/}
+            </div>}
+        </div>
     )
 };
 export default Minicart;

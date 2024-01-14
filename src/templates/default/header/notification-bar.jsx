@@ -19,8 +19,10 @@ function NotificationBar() {
                             <FontAwesomeIcon icon={faArrowRightLong} className="ml-2"/>
                         </a>
                     </p>
-                    <span className="p-1 block cursor-pointer absolute right-3 top-1 hover:text-blue-600 hover:scale-125 ease-out duration-300">
-                        <FontAwesomeIcon icon={faTimes} onClick={handleNotificationClose}/>
+                    <span
+                        onClick={handleNotificationClose}
+                        className="p-1 block cursor-pointer absolute right-3 top-1 hover:text-blue-600 hover:scale-125 ease-out duration-300">
+                        <FontAwesomeIcon icon={faTimes} />
                     </span>
                 </div>
             }

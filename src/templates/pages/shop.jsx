@@ -5,13 +5,16 @@ import CategorySidebar from "../components/category-sidebar";
 import AddToCart from "../components/add-to-cart";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
-import useProducts from "../../hook/useProducts";
+import useAllProducts from "../../hook/useAllProducts";
+import useCategoryProducts from "../../hook/useCategoryProducts";
 
 export default function Category() {
-    const {data: productList, isLoading, error} = useProducts();
     let {categoryName} = useParams();
-    const categoryNames = categoryName ? productList.filter(category => category.category === categoryName) : productList;
-    const products = categoryNames.map((product) => {
+    const [productInit, setProductInit] = useState([])
+    const {data: productList, isLoading, error} = useAllProducts(categoryName);
+    console.log(categoryName)
+    // const categoryNames = categoryName ? productList.filter(category => category.category === categoryName) : productList;
+    const products = productList.map((product) => {
         return (
             <li key={product.title.replace(/\s+/g, '-').toLowerCase()} className="product" id={`product-${product.id}`}>
                 <div className="product-image">
