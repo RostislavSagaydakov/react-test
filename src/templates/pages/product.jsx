@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import AddToCart from "../components/add-to-cart";
+import Breadcrumbs from "../components/beadcrumbs";
 
 function PageProduct() {
     let {productId} = useParams();
@@ -33,12 +34,13 @@ function PageProduct() {
             <div className="product-info w-7/12">
                 <h1>{product.title}</h1>
                 <p>{product.description}</p>
-                {/*<AddToCart id={product.id}/>*/}
+                <AddToCart element={product}/>
             </div>
         </div>
     )
     return (
         <>
+            <Breadcrumbs product={product} categoryName={product.category}/>
             {isLoading ? 'loading' :  productInit}
         </>
     )

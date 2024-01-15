@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {pending, success, fail} from "../redux/categories/categories";
+import {pending, success, fail} from "../redux/categories/categoryProducts";
 
 export default function useCategories() {
     const dispatch = useDispatch()
-    const categories = useSelector((state) => state)
+    const categories = useSelector((state) => state.categoryProducts)
 
     useEffect(() => {
         dispatch(pending());
@@ -14,7 +14,6 @@ export default function useCategories() {
                 const response = await fetch(url);
                 const data = await response.json();
                 dispatch(success(data));
-                // console.log(data)
             })();
         } catch(error) {
             dispatch(fail(error))

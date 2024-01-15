@@ -3,7 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const productsSlice = createSlice({
     name: 'products', // name of the reducer
     initialState : { // default name for default state
-        data: [],
+        data: {products: [], total: 0},
         isLoading: false,
         error: ''
     },
