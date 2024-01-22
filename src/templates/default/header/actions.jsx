@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import Modal from 'react-modal';
 import TopSearch from "./components/search";
 import AccountModalContent from "./components/account-modal";
@@ -6,15 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faUser, faCartShopping, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Minicart from "./components/minicart";
 import {useSelector} from "react-redux";
+import { useNavigate } from 'react-router-dom';
 function HeaderActions() {
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [minicartIsOpened, setMinicartIsOpened] = React.useState(false);
     const [topSearch, setTopSearch] = React.useState(false)
     const itemsInMinicart = useSelector(state => state.cart.itemsInCart);
     const itemsMinicartFiltered = [...new Set(itemsInMinicart)];
-
+    const navigate = useNavigate();
+    const user = JSON.parse(window.localStorage.getItem("currentUser"));
     function openModal() {
-        setIsOpen(true);
+        if (localStorage.getItem("currentUser") !== null) {
+            navigate(`/account`);
+        } else {
+            setIsOpen(true);
+        }
     }
     function closeModal() {
         setIsOpen(false);
@@ -27,27 +33,19 @@ function HeaderActions() {
     function openSearch() {
         setTopSearch(topSearch => !topSearch);
     }
-
-    // document.addEventListener('click', ({ target }) => {
-    //     if (!target.closest('#search')) {
-    //         setTopSearch(false)
-    //     } else {
-    //         setTopSearch(true)
-    //     }
-    // })
-
     return (
         <ul className="flex gap-4 items-center justify-between">
             <li id="search">
                 {topSearch && <TopSearch/>}
-                <span className="search-link cursor-pointer p-3 hover:text-blue-600" onClick={openSearch}>
+                <span className="search-link cursor-pointer p-3 hover:text-blue-600 block" onClick={openSearch}>
                     {!topSearch && <FontAwesomeIcon icon={faMagnifyingGlass} />}
                     {topSearch && <FontAwesomeIcon icon={faTimes} />}
                 </span>
             </li>
             <li>
-                <span className="account-link modal-opener cursor-pointer p-3 hover:text-blue-600" onClick={openModal}>
-                    <FontAwesomeIcon icon={faUser} />
+                <span className="account-link modal-opener cursor-pointer p-3 hover:text-blue-600 block" onClick={openModal}>
+                    {user && (<img src={user.image} alt={user.firstName} title={'Hello ' + user.firstName} className="w-5 h-5 block"/>)}
+                    {!user && <FontAwesomeIcon icon={faUser} />}
                 </span>
                 <Modal
                     ariaHideApp={false}
@@ -55,7 +53,8 @@ function HeaderActions() {
                     preventScroll={true}
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
-                    contentLabel="Example Modal"
+                    contentLabel="Login Modal"
+                    bodyOpenClassName="modal-active"
                 >
                     <button
                         onClick={closeModal}
@@ -63,13 +62,13 @@ function HeaderActions() {
                     >
                         <FontAwesomeIcon icon={faTimes} />
                     </button>
-                    <AccountModalContent/>
+                    <AccountModalContent closeModal={closeModal}/>
                 </Modal>
             </li>
             <li>
                 <span
                     onClick={openMinicart}
-                    className="minicart cursor-pointer p-3 hover:text-blue-600">
+                    className="minicart cursor-pointer p-3 hover:text-blue-600 block">
                     <FontAwesomeIcon icon={faCartShopping} />
                     {itemsMinicartFiltered.length}
                 </span>

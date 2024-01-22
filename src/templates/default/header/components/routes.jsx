@@ -6,10 +6,14 @@ import PageProduct from '../../../pages/product';
 import PageContact from "../../../pages/contact";
 import BlogArticles from "../../../pages/articles";
 import Cart from "../../../pages/checkout/cart";
-import Checkout from "../../../pages/checkout/checkout";
+// import Checkout from "../../../pages/checkout/checkout";
 import BaseHeader from "../../header";
+import AccountPage from "../../../pages/account";
 
 function RoutesFromMainMenu() {
+    // const checkIfLoggedIn = ()=> {
+    //     if (localStorage.getItem("currentUser") !== null) { <Route exact path="/account" element={<AccountPage/>}/> }
+    // }
     return (
         <BrowserRouter>
             <BaseHeader/>
@@ -22,7 +26,8 @@ function RoutesFromMainMenu() {
                     <Route exact path="/contact" element={<PageContact/>}/>
                     <Route exact path="/blog" element={<BlogArticles/>}/>
                     <Route exact path="/checkout/cart" element={<Cart/>}/>
-                    <Route exact path="/checkout" element={<Checkout/>}/>
+                    {/*{checkIfLoggedIn}*/}
+                    <Route exact path="/account" element={<AccountPage/>}/>
                     <Route path="*" element={<PageError/>}/>
                 </Routes>
             </main>

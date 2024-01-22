@@ -7,14 +7,14 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import useAllProducts from "../../hook/useAllProducts";
 import {useState} from "react";
 import Breadcrumbs from "../components/beadcrumbs";
+import Pagination from "../components/pagination";
 // import ProductSorting from "../default/product-sorting";
 
 export default function Category() {
-    const pages = [];
     const [itemsPerPage, setItemsPerPage] = useState(3)
     const [skip, setSkip] = useState(0)
     const {categoryName} = useParams();
-    const {data, isLoading, error} = useAllProducts(categoryName, itemsPerPage, skip);
+    const {data, isLoading, error} = useAllProducts(categoryName, itemsPerPage, skip, setSkip);
     const products = data.products.map((product) => {
         return (
             <li key={product.title.replace(/\s+/g, '-').toLowerCase()} className="product" id={`product-${product.id}`}>
@@ -55,21 +55,6 @@ export default function Category() {
     const handleLoadMoreProducts = (event) => {
         event.stopPropagation();
     }
-
-    const handleGoToPage = (event)=> {
-        event.preventDefault();
-        const pageNumber = Number(event.target.attributes.getNamedItem("data-page-number").value);
-        setSkip(pageNumber * itemsPerPage)
-        event.target.classList.add('bg-blue-500')
-    }
-    for (let i = 0; i < Math.ceil(data.total / itemsPerPage); i++) {
-        pages.push(
-            <button key={i}
-                    onClick={handleGoToPage}
-                    className="hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mr-1 mb-1"
-                    data-page-number={i}>{i + 1}</button>
-        );
-    }
     return(
         <>
             <Breadcrumbs categoryName={categoryName} product={''}/>
@@ -89,9 +74,7 @@ export default function Category() {
                     <ul className="grid grid-cols-3 gap-4">
                         {isLoading ? '...loading...' : products}
                     </ul>
-                    <div className="paging">
-                        {pages}
-                    </div>
+                    <Pagination skip={skip} itemsPerPage={itemsPerPage} total={data.total} setSkip={setSkip}/>
                     {/*<button*/}
                     {/*    onClick={handleLoadMoreProducts}*/}
                     {/*    className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">*/}

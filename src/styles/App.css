@@ -7,6 +7,19 @@
   --menu-link-hover: #2563eb;
 }
 
+button {
+  @apply hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mr-1 mb-1;
+}
+
+input[type=email], input[type=number], input[type=password], input[type=text] {
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2;
+}
+
+.lazy-load-image-background {
+  display: block !important;
+  height: 100%;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -64,6 +77,10 @@
   position: relative;
   z-index: 3;
 }
+.modal_account-form {
+  width: clamp(320px, 456px, 100%);
+  margin: auto;
+}
 
 .load {
   position: fixed;
@@ -72,6 +89,12 @@
   top: 0;
   right: 0;
   bottom: 0;
+}
+
+.ReactModal__Content {
+  max-width: 1440px;
+  margin: auto;
+  @apply bg-slate-300;
 }
 
 /*# sourceMappingURL=App.css.map */
