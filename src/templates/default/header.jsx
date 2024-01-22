@@ -8,13 +8,15 @@ function BaseHeader() {
     return (
         <>
             <NotificationBar/>
-            <header className="header container mx-auto py-4 items-center justify-between">
-                <NavLink to="/">
-                    <img src={logo} className="logo" alt="logo" />
-                </NavLink>
-                <Navigation/>
-                <HeaderActions/>
-            </header>
+            <div className="header-holder">
+                <header className="header container mx-auto py-4 items-center justify-between">
+                    <NavLink to="/">
+                        <img src={logo} className="logo" alt="logo" />
+                    </NavLink>
+                    <Navigation/>
+                    <HeaderActions/>
+                </header>
+            </div>
         </>
     )
 }

@@ -16,7 +16,7 @@ function HeroSlider() {
         fetchData(imagesURL)
     }, []);
     return(
-        <section>
+        <section className="hero-banner">
             <Swiper
                 // lazy={true}
                 modules={[Navigation, Pagination, A11y]}

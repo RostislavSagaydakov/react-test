@@ -8,6 +8,7 @@ import useAllProducts from "../../hook/useAllProducts";
 import {useState} from "react";
 import Breadcrumbs from "../components/beadcrumbs";
 import Pagination from "../components/pagination";
+import Loader from "../components/loader";
 // import ProductSorting from "../default/product-sorting";
 
 export default function Category() {
@@ -71,8 +72,9 @@ export default function Category() {
                         <option value="24">24</option>
                         <option value="33">33</option>
                     </select>
+                    {isLoading && <Loader/>}
                     <ul className="grid grid-cols-3 gap-4">
-                        {isLoading ? '...loading...' : products}
+                        {!isLoading && products}
                     </ul>
                     <Pagination skip={skip} itemsPerPage={itemsPerPage} total={data.total} setSkip={setSkip}/>
                     {/*<button*/}

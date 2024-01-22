@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "components/hero-banner";
+
 :root {
   --dropdown-background: #fff;
   --header-background: var(--dropdown-background);
@@ -25,11 +27,14 @@ input {
 .header {
   display: flex;
   flex-direction: row;
-  position: sticky;
-  left: 0;
-  top: 0;
-  z-index: 2;
-  background: var(--header-background);
+  &-holder {
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background: var(--header-background);
+    border-bottom: 1px solid #e5e7eb;
+  }
 
   .logo {
     width: 10rem;
@@ -96,6 +101,8 @@ input {
   }
 }
 
+
+
 .modal {
   position: relative;
   z-index: 3;
@@ -123,3 +130,14 @@ input {
   }
 }
 
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center,  #e2e2e2 20%,#fefefe 67%);
+  aspect-ratio:1;
+  max-width: 300px;
+  border-radius: 50%;
+  font-size: 50px;
+  margin: auto;
+}

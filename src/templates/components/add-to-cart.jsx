@@ -11,6 +11,7 @@ function AddToCart(props) {
 
     const handleAddItem = (event) => {
         event.stopPropagation();
+        // console.log(props.element)
         if (isItemInCart) {
             dispatch(deleteItemFromCart(props.element.id));
         } else {
