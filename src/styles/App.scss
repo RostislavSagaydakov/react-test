@@ -101,7 +101,12 @@ input {
   }
 }
 
-
+.container-full {
+  width: var(--dws);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 .modal {
   position: relative;
@@ -141,3 +146,24 @@ input {
   font-size: 50px;
   margin: auto;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: bold;
+}
+h1 {
+  font-size: clamp(1.5rem, 3vw, 5rem);
+  span {
+    color: #6C7275;
+  }
+}
+h2 {
+  font-size: clamp(1.4rem, 2.6vw, 4.5rem);
+}
+
+
+
+
+

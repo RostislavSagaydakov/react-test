@@ -16,7 +16,7 @@ function HeroSlider() {
         fetchData(imagesURL)
     }, []);
     return(
-        <section className="hero-banner">
+        <section className="hero-banner mb-10 container-full">
             <Swiper
                 // lazy={true}
                 modules={[Navigation, Pagination, A11y]}
@@ -24,6 +24,7 @@ function HeroSlider() {
                 slidesPerView={1}
                 navigation
                 pagination={{ clickable: true }}
+                className="mb-10"
             >
                 {images && images.map((image, index) => {
                     return (
@@ -34,13 +35,17 @@ function HeroSlider() {
                                 alt=""
                             />
                             <div className="text">
-                                {image.description}
+                                <div className="container mx-auto">
+                                    <span className="text-holder">
+                                        {image.description}
+                                    </span>
+                                </div>
                             </div>
                         </SwiperSlide>
                     );
                 })}
             </Swiper>
-            <div className="heading">
+            <div className="heading container mx-auto grid grid-cols-2 gap-4 items-center">
                 <h1>Simply Unique<span>/</span><br/>Simply Better<span>.</span></h1>
                 <p>Elegant is a gift & decorations store based in HCMC, Vietnam. Est since 2019. </p>
             </div>

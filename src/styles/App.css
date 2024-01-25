@@ -1,12 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.hero-banner {
-  width: var(--dws);
+.hero-banner .swiper-slide {
+  height: calc(100vh - 127px);
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 }
+.hero-banner .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-banner .swiper-slide .text {
+  inset: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  font-size: clamp(1.5rem, 2.5vw, 4rem);
+}
+.hero-banner .swiper-slide .text-holder {
+  background: rgba(255, 255, 255, 0.5);
+}
+
 :root {
   --dropdown-background: #fff;
   --header-background: var(--dropdown-background);
@@ -82,6 +97,13 @@ input[type=email], input[type=number], input[type=password], input[type=text] {
   flex: 1;
 }
 
+.container-full {
+  width: var(--dws);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .modal {
   position: relative;
   z-index: 3;
@@ -116,6 +138,24 @@ input[type=email], input[type=number], input[type=password], input[type=text] {
   border-radius: 50%;
   font-size: 50px;
   margin: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 3vw, 5rem);
+}
+h1 span {
+  color: #6C7275;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.6vw, 4.5rem);
 }
 
 /*# sourceMappingURL=App.css.map */

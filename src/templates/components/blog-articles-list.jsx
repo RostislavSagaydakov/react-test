@@ -1,9 +1,11 @@
+import {NavLink} from "react-router-dom";
+
 function BlogArticlesList(){
     return(
         <>
             <div className="heading">
                 <h1>Articles</h1>
-                <a href="/blog">More Articles</a>
+                <NavLink to="/blog/" className="link-more">More Articles</NavLink>
             </div>
             <div className="grid grid-cols-3 gap-4">
                 <div>

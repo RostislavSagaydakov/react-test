@@ -1,10 +1,26 @@
 .hero-banner {
-  width: var(--dws);
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-
   .swiper-slide {
-    //height: ;
+    height: calc(100vh - 127px);
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .text {
+      inset:0;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      font-size: clamp(1.5rem, 2.5vw, 4rem);
+
+      &-holder {
+        background: rgba(255,255,255, .5);
+
+      }
+    }
   }
 }

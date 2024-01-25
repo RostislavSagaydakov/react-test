@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import {useEffect, useState} from "react";
+import {NavLink} from "react-router-dom";
 
 function ProductSlider() {
     const [images, setImages] = useState([]);
@@ -19,7 +20,7 @@ function ProductSlider() {
         <section>
             <div className="heading">
                 <h1>New <br/>Arrivals</h1>
-                <a href="/shop">More Products</a>
+                <NavLink to="/shop/" className="link-more">More Products</NavLink>
             </div>
             <Swiper
                 modules={[Scrollbar, A11y]}

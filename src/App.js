@@ -13,6 +13,7 @@ function App() {
     deviceViewScreenSizeWidth();
     let ro_vws = new ResizeObserver(() => { deviceViewScreenSizeWidth() });
     ro_vws.observe(document.body); // add elements with potential scroll bar
+
   return (
       <Provider store={store}>
           <BaseLayout/>

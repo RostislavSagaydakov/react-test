@@ -9,6 +9,7 @@ import Cart from "../../../pages/checkout/cart";
 // import Checkout from "../../../pages/checkout/checkout";
 import BaseHeader from "../../header";
 import AccountPage from "../../../pages/account";
+import Page403 from "../../../pages/403";
 
 function RoutesFromMainMenu() {
     // const checkIfLoggedIn = ()=> {
@@ -28,6 +29,7 @@ function RoutesFromMainMenu() {
                     <Route exact path="/checkout/cart" element={<Cart/>}/>
                     {/*{checkIfLoggedIn}*/}
                     <Route exact path="/account" element={<AccountPage/>}/>
+                    <Route path="/access-denied" element={<Page403/>}/>
                     <Route path="*" element={<PageError/>}/>
                 </Routes>
             </main>

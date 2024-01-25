@@ -1,21 +1,27 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import withUserAccess from "../../hocs/withUserAccess";
+import { useSelector } from "react-redux";
+import {useDispatch} from "react-redux";
+import {logout} from "../../redux/user/user";
 
 const AccountPage = () => {
-    const user = JSON.parse(window.localStorage.getItem("currentUser"))
     const navigate = useNavigate();
-    const logout = ()=> {
-        localStorage.removeItem("currentUser");
+    const {data} = useSelector(state => state.user)
+    const dispatch = useDispatch()
+    const handleLogout = ()=> {
+        dispatch(logout())
         navigate(`/`);
     }
+    console.log(data)
     return (
         <div>
-            <button onClick={logout}>LOGOUT</button>
-            <img src={user.image} alt=""/>
-            {user.firstName}
-            {user.lastName}
+            <button onClick={handleLogout}>LOGOUT</button>
+            <img src={data.image} alt=""/>
+            {data.firstName}
+            {data.lastName}
         </div>
     );
 };
 
-export default AccountPage;
+export default withUserAccess(AccountPage);
