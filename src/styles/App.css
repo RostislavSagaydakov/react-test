@@ -22,6 +22,12 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
+.product-items .product-image img {
+  aspect-ratio: 265/350;
+  object-fit: cover;
+  object-position: center;
+}
+
 :root {
   --dropdown-background: #fff;
   --header-background: var(--dropdown-background);

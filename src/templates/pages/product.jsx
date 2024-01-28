@@ -7,6 +7,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import AddToCart from "../components/add-to-cart";
 import Breadcrumbs from "../components/beadcrumbs";
+import Loader from "../components/loader";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import React from "react";
 
 function PageProduct() {
     let {productId} = useParams();
@@ -25,7 +28,11 @@ function PageProduct() {
                     {product.images && product.images.map((product, index) => {
                         return (
                             <SwiperSlide key={index}>
-                                <img src={product}/>
+                                <LazyLoadImage
+                                    effect="blur"
+                                    alt=""
+                                    src={product}
+                                />
                             </SwiperSlide>
                         )
                     })}
@@ -41,7 +48,7 @@ function PageProduct() {
     return (
         <>
             <Breadcrumbs product={product} categoryName={product.category}/>
-            {isLoading ? 'loading' :  productInit}
+            {isLoading ? <Loader/> :  productInit}
         </>
     )
 }

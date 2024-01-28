@@ -5,6 +5,7 @@ import PageShop from '../../../pages/shop';
 import PageProduct from '../../../pages/product';
 import PageContact from "../../../pages/contact";
 import BlogArticles from "../../../pages/articles";
+import BlogArticle from "../../../pages/article";
 import Cart from "../../../pages/checkout/cart";
 // import Checkout from "../../../pages/checkout/checkout";
 import BaseHeader from "../../header";
@@ -12,9 +13,6 @@ import AccountPage from "../../../pages/account";
 import Page403 from "../../../pages/403";
 
 function RoutesFromMainMenu() {
-    // const checkIfLoggedIn = ()=> {
-    //     if (localStorage.getItem("currentUser") !== null) { <Route exact path="/account" element={<AccountPage/>}/> }
-    // }
     return (
         <BrowserRouter>
             <BaseHeader/>
@@ -26,8 +24,8 @@ function RoutesFromMainMenu() {
                     <Route exact path="/shop/:categoryName/:productId" element={<PageProduct/>}/>
                     <Route exact path="/contact" element={<PageContact/>}/>
                     <Route exact path="/blog" element={<BlogArticles/>}/>
+                    <Route exact path="/blog/:blogId" element={<BlogArticle/>}/>
                     <Route exact path="/checkout/cart" element={<Cart/>}/>
-                    {/*{checkIfLoggedIn}*/}
                     <Route exact path="/account" element={<AccountPage/>}/>
                     <Route path="/access-denied" element={<Page403/>}/>
                     <Route path="*" element={<PageError/>}/>

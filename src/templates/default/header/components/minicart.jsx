@@ -1,3 +1,4 @@
+import React, { useRef, useEffect } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {deleteItemFromCart} from "../../../../redux/cart/reducer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,8 +11,32 @@ function Minicart(props) {
     const itemsList = useSelector(state => state.cart.itemsInCart);
     const items = [...new Set(itemsList)];
     const totalPrice = items.reduce((acc, element) => acc += element.price * element.quantity , 0)
+    const minicartRef = useRef(null);
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (minicartRef.current && !minicartRef.current.contains(event.target)) {
+                props.openMinicart();
+            }
+        }
+
+        function handleKeyDown(event) {
+            if (event.keyCode === 27) {
+                props.openMinicart();
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [minicartRef, props]);
     return (
-        <div className="minicart fixed top-0 bottom-0 right-0 h-dvh overflow-auto w-64 bg-gray-200 border-s-4 border-indigo-500 p-4">
+        <div
+            ref={minicartRef}
+            className="minicart fixed top-0 bottom-0 right-0 h-dvh overflow-auto w-64 bg-gray-200 border-s-4 border-indigo-500 p-4">
             <span
                 onClick={props.openMinicart}
                 className="p-1 block cursor-pointer hover:text-blue-600 ease-out duration-300">
@@ -23,7 +48,7 @@ function Minicart(props) {
                     {items.map((addedItem, index) => (
                         <li key={index} className="grid grid-cols-4 grid-rows-2 gap-1">
                             <div className="row-span-2">
-                                <img
+                                <LazyLoadImage
                                     src={addedItem.thumbnail}
                                     alt={addedItem.title}
                                 />

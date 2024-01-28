@@ -46,6 +46,7 @@ function AccountModalContent(props) {
                 dispatch(fail(error));
                 console.error('Error fetching users:', error);
             }
+            props.closeModal()
         };
         fetchUsers();
     };

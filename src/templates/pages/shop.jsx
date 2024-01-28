@@ -5,14 +5,14 @@ import AddToCart from "../components/add-to-cart";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import useAllProducts from "../../hook/useAllProducts";
-import {useState} from "react";
+import React, {useState} from "react";
 import Breadcrumbs from "../components/beadcrumbs";
 import Pagination from "../components/pagination";
 import Loader from "../components/loader";
 // import ProductSorting from "../default/product-sorting";
 
 export default function Category() {
-    const [itemsPerPage, setItemsPerPage] = useState(3)
+    const [itemsPerPage, setItemsPerPage] = useState(12)
     const [skip, setSkip] = useState(0)
     const {categoryName} = useParams();
     const {data, isLoading, error} = useAllProducts(categoryName, itemsPerPage, skip, setSkip);
@@ -22,10 +22,12 @@ export default function Category() {
                 <div className="product-image">
                     <NavLink to={"/shop/" + product.category + "/" + product.id}>
                         <LazyLoadImage
+                            effect="blur"
                             alt={product.brand}
                             src={product.thumbnail}
                         />
                         <span className="product-brand">{product.brand}</span>
+                        {product.discountPercentage && <span className='product-discount'>-{product.discountPercentage}%</span>}
                     </NavLink>
                 </div>
                 <div className="product-info">
@@ -40,7 +42,6 @@ export default function Category() {
                             </NavLink>
                         </div>
                         <div className="product-price">
-                            {product.discountPercentage && <span className='product-discount'>-{product.discountPercentage}%</span>}
                             <span className="product-price">${product.price}</span>
                         </div>
                     </div>
@@ -53,9 +54,9 @@ export default function Category() {
         setItemsPerPage(event.target.value)
         setSkip(0)
     }
-    const handleLoadMoreProducts = (event) => {
-        event.stopPropagation();
-    }
+    // const handleLoadMoreProducts = (event) => {
+    //     event.stopPropagation();
+    // }
     return(
         <>
             <Breadcrumbs categoryName={categoryName} product={''}/>
@@ -68,12 +69,12 @@ export default function Category() {
                             id="per-page"
                             defaultValue={itemsPerPage}
                             onChange={handleItemsPerPage}>
-                        <option value="12">12</option>
+                        <option defaultValue="12">12</option>
                         <option value="24">24</option>
                         <option value="33">33</option>
                     </select>
                     {isLoading && <Loader/>}
-                    <ul className="grid grid-cols-3 gap-4">
+                    <ul className="grid grid-cols-3 gap-4 product-items">
                         {!isLoading && products}
                     </ul>
                     <Pagination skip={skip} itemsPerPage={itemsPerPage} total={data.total} setSkip={setSkip}/>

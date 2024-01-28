@@ -5,6 +5,7 @@ import singleProduct from "./products/singleProduct";
 import categories from "./categories/categories";
 import categoryProducts from "./categories/categoryProducts";
 import blogList from "./blog/blog-list"
+import blogPost from "./blog/blog-post"
 import user from "./user/user";
 
 export const store = configureStore({
@@ -15,6 +16,7 @@ export const store = configureStore({
         categories: categories,
         categoryProducts: categoryProducts,
         blogList: blogList,
+        blogPost: blogPost,
         user: user
     }
 })

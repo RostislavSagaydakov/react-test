@@ -13,7 +13,7 @@ const AccountPage = () => {
         dispatch(logout())
         navigate(`/`);
     }
-    console.log(data)
+    // console.log(data)
     return (
         <div>
             <button onClick={handleLogout}>LOGOUT</button>

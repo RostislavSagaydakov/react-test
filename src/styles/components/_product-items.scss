@@ -1,0 +1,11 @@
+.product-items {
+  .product {
+    &-image {
+      img {
+        aspect-ratio: 265 / 350;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+}
