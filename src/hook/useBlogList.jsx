@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {pending, success, fail} from "../redux/blog/blog-list";
 
-export default function useBlogList( itemLimit = 10, skip, setSkip) {
+export default function useBlogList( itemLimit = 10, skip = 0, setSkip = 0) {
     const dispatch = useDispatch()
     const blogListItems = useSelector((state) => state.blogList)
     useEffect(() => {

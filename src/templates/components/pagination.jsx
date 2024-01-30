@@ -1,6 +1,5 @@
 export default function Pagination({skip ,itemsPerPage = 10,total = 0, setSkip = 0}) {
     const pages = [];
-    let pagesTotal;
     const round = Math.ceil(total / itemsPerPage);
     const className = ""
     const activePageNumber = Math.floor(skip / itemsPerPage) // refactor needed!
@@ -30,14 +29,13 @@ export default function Pagination({skip ,itemsPerPage = 10,total = 0, setSkip =
                 >{i + 1}</button>
             );
         }
-        pagesTotal = i;
 
     }
     return (
         <div className="paging">
             {activePageNumber > 0 && <button onClick={prev}>prev</button>}
             {round > 1 ? pages : null}
-            {activePageNumber < pagesTotal && <button onClick={next}>next</button>}
+            {activePageNumber < round -1 && <button onClick={next}>next</button>}
         </div>
     )
 }

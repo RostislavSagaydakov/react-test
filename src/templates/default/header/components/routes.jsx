@@ -11,10 +11,12 @@ import Cart from "../../../pages/checkout/cart";
 import BaseHeader from "../../header";
 import AccountPage from "../../../pages/account";
 import Page403 from "../../../pages/403";
+import ScrollToTop from "../../../../utils/scroll-fix";
 
 function RoutesFromMainMenu() {
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <BaseHeader/>
             <main className="container mx-auto">
                 <Routes>

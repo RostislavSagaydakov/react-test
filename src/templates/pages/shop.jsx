@@ -5,13 +5,15 @@ import AddToCart from "../components/add-to-cart";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import useAllProducts from "../../hook/useAllProducts";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Breadcrumbs from "../components/beadcrumbs";
 import Pagination from "../components/pagination";
 import Loader from "../components/loader";
+import ViewItems from "../components/view-items";
 // import ProductSorting from "../default/product-sorting";
 
 export default function Category() {
+    const [viewMode, setViewMode] = useState(localStorage.getItem('viewMode'))
     const [itemsPerPage, setItemsPerPage] = useState(12)
     const [skip, setSkip] = useState(0)
     const {categoryName} = useParams();
@@ -54,9 +56,6 @@ export default function Category() {
         setItemsPerPage(event.target.value)
         setSkip(0)
     }
-    // const handleLoadMoreProducts = (event) => {
-    //     event.stopPropagation();
-    // }
     return(
         <>
             <Breadcrumbs categoryName={categoryName} product={''}/>
@@ -65,24 +64,22 @@ export default function Category() {
                 <div className="section-category_block w-9/12">
                     {error ?? error}
                     {/*<ProductSorting sort={products}/>*/}
-                    <select name="sort"
-                            id="per-page"
-                            defaultValue={itemsPerPage}
-                            onChange={handleItemsPerPage}>
-                        <option defaultValue="12">12</option>
-                        <option value="24">24</option>
-                        <option value="33">33</option>
-                    </select>
+                    <div className="sort-bar">
+                        <select name="sort"
+                                id="per-page"
+                                defaultValue={itemsPerPage}
+                                onChange={handleItemsPerPage}>
+                            <option defaultValue="12">12</option>
+                            <option value="24">24</option>
+                            <option value="33">33</option>
+                        </select>
+                        <ViewItems setViewMode={setViewMode}/>
+                    </div>
                     {isLoading && <Loader/>}
-                    <ul className="grid grid-cols-3 gap-4 product-items">
+                    <ul className={"grid grid-cols-3 gap-4 product-items " + (viewMode)}>
                         {!isLoading && products}
                     </ul>
                     <Pagination skip={skip} itemsPerPage={itemsPerPage} total={data.total} setSkip={setSkip}/>
-                    {/*<button*/}
-                    {/*    onClick={handleLoadMoreProducts}*/}
-                    {/*    className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">*/}
-                    {/*    Load More*/}
-                    {/*</button>*/}
                 </div>
             </section>
         </>

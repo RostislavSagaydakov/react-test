@@ -18,6 +18,6 @@ export default function useProduct(id) {
         } catch(error) {
             dispatch(fail(error))
         }
-    }, []);
+    }, [id]);
     return product;
 }

@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {pending, success, fail} from "../redux/products/productList";
 import usePrevious from "./usePrevious";
 
-export default function useAllProducts(categoryName, itemsPerPage, skip, setSkip) {
+export default function useAllProducts(categoryName, itemsPerPage, skip, setSkip = 0) {
     const dispatch = useDispatch()
     const products = useSelector((state) => state.products)
     const prevCategoryName = usePrevious(categoryName);

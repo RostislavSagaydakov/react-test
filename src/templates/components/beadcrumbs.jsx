@@ -33,10 +33,10 @@ export default function Breadcrumbs(props) {
                                   d="m1 9 4-4-4-4"/>
                         </svg>
                         <NavLink to={'/shop/' + props.categoryName}
-                                 className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">{props.categoryName}</NavLink>
+                                 className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">{props.categoryName.replace(/-/g, ' ')}</NavLink>
                     </li>}
                     {props.product.title && <li className="flex items-center">
-                        {props.product.title}
+                        : {props.product.title}
                     </li>}
                 </ul>
             </nav>
