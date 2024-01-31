@@ -8,15 +8,15 @@ function AddToCart(props) {
     const [quantity, setQuantity] = useState(1);
     const [showMessage, setShowMessage] = useState(false);
     const [productMsg, setProductMsg] = useState("");
-
+    const [productMsgClassName, setProductMsgClassName] = useState("");
     const isItemInCart = itemsList.some((item) => item.id === props.element.id);
-
     const handleAddItem = (event) => {
         event.stopPropagation();
         const productName = props.element.title
         if (isItemInCart) {
             dispatch(deleteItemFromCart(props.element.id));
             setShowMessage(true);
+            setProductMsgClassName('bg-red-300')
             setProductMsg(productName + ' removed from cart');
         } else {
             if (quantity < 1) {
@@ -25,6 +25,7 @@ function AddToCart(props) {
             }
             dispatch(setItemInCart({ ...props.element, quantity }));
             setShowMessage(true);
+            setProductMsgClassName('bg-lime-300')
             setProductMsg(productName + ' added to cart');
         }
     };
@@ -63,7 +64,15 @@ function AddToCart(props) {
                 </button>
             </div>
             {showMessage && (
-                <div>{productMsg}</div>
+                <div className={
+                        "alert-msg shadow-md gap-4 p-4 rounded-lg flex justify-between items-center text-lg " +
+                        productMsgClassName
+                    }>
+                    {productMsg}
+                    <button
+                        className="m-0 bg-white"
+                        onClick={()=> {setShowMessage((showMessage) => !showMessage)}}>X</button>
+                </div>
             )}
 
         </>

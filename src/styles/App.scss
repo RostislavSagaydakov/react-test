@@ -4,6 +4,8 @@
 
 @import "components/hero-banner";
 @import "components/product-items";
+@import "components/add-to-cart";
+@import "components/top-search";
 
 :root {
   --dropdown-background: #fff;
@@ -11,14 +13,14 @@
   --menu-link-hover: #2563eb;
 }
 button {
-  @apply hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mr-1 mb-1;
+  @apply hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-lg mr-1 mb-1;
 }
 input {
   &[type=email],
   &[type=number],
   &[type=password],
   &[type=text] {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2;
+    @apply bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2;
   }
 }
 .lazy-load-image-background {
@@ -77,26 +79,6 @@ input {
       text-transform: capitalize;
       li {
 
-      }
-    }
-  }
-
-  #search {
-    position: relative;
-    .search-bar {
-      position: absolute;
-      right: 100%;
-      top: -50%;
-      width: clamp(250px, 400px, 50vw);
-      display: flex;
-      + .search-link {
-        &:after {
-
-        }
-      }
-
-      input {
-        flex:1;
       }
     }
   }

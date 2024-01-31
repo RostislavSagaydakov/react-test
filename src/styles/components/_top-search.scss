@@ -1,0 +1,21 @@
+#search {
+  position: relative;
+  .search-bar {
+    position: absolute;
+    height: 100%;
+    right: 100%;
+    width: clamp(250px, 400px, 50vw);
+    display: flex;
+    + .search-link {
+      &:after {
+
+      }
+    }
+
+    input {
+      flex:1;
+      margin: 0;
+      padding-right: 40px;
+    }
+  }
+}

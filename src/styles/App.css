@@ -28,6 +28,29 @@
   object-position: center;
 }
 
+.alert-msg {
+  position: fixed;
+  right: 20px;
+  top: 50px;
+  z-index: 10;
+}
+
+#search {
+  position: relative;
+}
+#search .search-bar {
+  position: absolute;
+  height: 100%;
+  right: 100%;
+  width: clamp(250px, 400px, 50vw);
+  display: flex;
+}
+#search .search-bar input {
+  flex: 1;
+  margin: 0;
+  padding-right: 40px;
+}
+
 :root {
   --dropdown-background: #fff;
   --header-background: var(--dropdown-background);
@@ -35,11 +58,11 @@
 }
 
 button {
-  @apply hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mr-1 mb-1;
+  @apply hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-lg mr-1 mb-1;
 }
 
 input[type=email], input[type=number], input[type=password], input[type=text] {
-  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2;
+  @apply bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2;
 }
 
 .lazy-load-image-background {
@@ -89,20 +112,6 @@ input[type=email], input[type=number], input[type=password], input[type=text] {
   border-radius: 15px;
   text-transform: capitalize;
 }
-.header #search {
-  position: relative;
-}
-.header #search .search-bar {
-  position: absolute;
-  right: 100%;
-  top: -50%;
-  width: clamp(250px, 400px, 50vw);
-  display: flex;
-}
-.header #search .search-bar input {
-  flex: 1;
-}
-
 .container-full {
   width: var(--dws);
   position: relative;

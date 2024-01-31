@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import Modal from 'react-modal';
 import TopSearch from "./components/search";
 import AccountModalContent from "./components/account-modal";
@@ -8,6 +8,7 @@ import Minicart from "./components/minicart";
 import {useSelector} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 function HeaderActions() {
+    const searchToggleRef = useRef();
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [minicartIsOpened, setMinicartIsOpened] = React.useState(false);
     const [topSearch, setTopSearch] = React.useState(false)
@@ -33,11 +34,17 @@ function HeaderActions() {
     function openSearch() {
         setTopSearch(topSearch => !topSearch);
     }
+
+    console.log(itemsInMinicart)
     return (
         <ul className="flex gap-4 items-center justify-between">
             <li id="search">
-                {topSearch && <TopSearch/>}
-                <span className="search-link cursor-pointer p-3 hover:text-blue-600 block" onClick={openSearch}>
+                {topSearch && <TopSearch openSearch={openSearch} searchToggleRef={searchToggleRef}/>}
+                <span
+                    ref={searchToggleRef}
+                    className="search-link cursor-pointer p-3 hover:text-blue-600 block"
+                    onClick={openSearch}
+                >
                     {!topSearch && <FontAwesomeIcon icon={faMagnifyingGlass} />}
                     {topSearch && <FontAwesomeIcon icon={faTimes} />}
                 </span>

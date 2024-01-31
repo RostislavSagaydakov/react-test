@@ -7,6 +7,7 @@ import categoryProducts from "./categories/categoryProducts";
 import blogList from "./blog/blog-list"
 import blogPost from "./blog/blog-post"
 import user from "./user/user";
+import topSearch from "./header/search"
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
         categoryProducts: categoryProducts,
         blogList: blogList,
         blogPost: blogPost,
-        user: user
+        user: user,
+        topSearch: topSearch
     }
 })
